@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>What is a Collection - Backbone</title>
+</head>
+
+<body>
+    <div id="search_container"></div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script>
+    (function($) {
+        var Song = Backbone.Model.extend({
+            defaults: {
+                name: "Not",
+                artist: "Not"
+            },
+            initialize: function() {
+                console.log("Music is 鹅美曾");
+            }
+        });
+        var Album = Backbone.Collection.extend({
+            model: Song
+        });
+
+        var song1 = new Song({name: 'All', artist:" OMC"});
+        var song2 = new Song({name: 'All2', artist:" O23MC"});
+        var song3 = new Song({name: 'All3', artist:" O3MC"});
+
+        var myAlbum = new Album([song1, song2, song3]);
+        console.log(myAlbum.models);
+    })(jQuery);
+    </script>
+</body>
+
+</html>

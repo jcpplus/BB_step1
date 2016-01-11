@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>the5fire.com-backbone.js-Hello World</title>
+</head>
+
+<body>
+    <button id="check">新手报到</button>
+    <ul id="world-list">
+    </ul>
+    <a href="http://www.the5fire.com">更多教程</a>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script>
+    (function($) {
+        // code here
+        // 最简单的Model对象
+        var M = Backbone.Model.extend({
+            initialize: function(){
+                alert("hello Backbone!");
+            },
+            // 对象赋值的两种方法
+            // 1: 直接定义，设置默认值
+            defaults: {
+                name: "张三",
+                age: "38"
+            },
+            //  对象中的方法
+            aboutMe: function() {
+                return "我叫" + this.get('name') + " , 今年" +this.get('age') + "岁";
+            }
+        });
+        var m = new M();
+        alert(m.get('name'));
+        //2 赋值时定义
+        m.set({name: "the5age", age: "39"});
+        alert(m.get('age'));
+
+        // 调用  对象中的方法
+        alert(m.aboutMe());
+    })(jQuery);
+    </script>
+</body>
+
+</html>

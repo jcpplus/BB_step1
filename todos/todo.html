@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Backbone.js Todos</title>
+  <link rel="stylesheet" href="todo.css"/>
+</head>
+
+<body>
+
+  <div id="todoApp">
+
+    <header>
+      <h1>Todos</h1>
+      <input id="newTodo" type="text" placeholder="What needs to be done?">
+    </header>
+
+    <section id="main">
+      <input id="toggleAll" type="checkbox">
+      <label for="toggleAll">Mark all as complete</label>
+      <ul id="todoList"></ul>
+    </section>
+
+    <footer>
+      <a id="clearCompleted">Clear completed</a>
+      <div id="todoCount"></div>
+    </footer>
+
+  </div>
+
+  <div id="instructions">
+    Double-click to edit a todo.
+  </div>
+
+  <div id="credits">
+    Created by
+    <br />
+    <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
+    <br />Rewritten by: <a href="https://github.com/tastejs/todomvc">TodoMVC</a>.
+  </div>
+
+  <!-- <script src="../js/json2.js"></script> -->
+  <script src="../js/jquery.js"></script>
+  <script src="../js/underscore.js"></script>
+  <script src="../js/backbone.js"></script>
+  <script src="../js/backbone.localStorage.js"></script>
+  <script src="todo.js"></script>
+
+  <!-- Templates -->
+
+  <script type="text/template" id="itemTemplate">
+    <div class="view">
+      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+      <label><%- title %></label>
+      <a class="destroy"></a>
+    </div>
+    <input class="edit" type="text" value="<%- title %>" />
+  </script>
+  <script type="text/template" id="statsTemplate">
+    <% if (done) { %>
+      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+    <% } %>
+    <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+  </script>
+
+  </body>
+</html>
+

@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>What is the Model - Backbone</title>
+</head>
+
+<body>
+    <div id="search_container"></div>
+
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script>
+    (function($) {
+        var Human = Backbone.Model.extend({
+            defaults: {
+                name: "jack",
+                age: 80,
+                child: ""
+            },
+            initialize: function(){
+                alert("Welcome to this World!");
+            },
+            // 操作模型属性  - 自定义模型属性
+            adpot: function(newChildName) {
+                this.set({child: newChildName});
+            }
+        });
+
+        // 或者可以直接在初始化的时候设置值
+        var human = new Human();
+        console.log(human.get("name"));
+        console.log(human.get("age"));
+
+
+        var human = new Human({name: "Luck", age: "44"});
+        human.set({name: "tomas", age: 67, child: "Royn"});
+        var father = human.get("name");
+        var fatherAge = human.get("age");
+        var child = human.get("child");
+        console.log(father, fatherAge, child);
+
+        // 调用模型操作
+        human.adpot("John Resig");
+        var newChild = human.get("child");
+        console.log("newChild is " + newChild);
+
+
+
+    })(jQuery);
+    </script>
+</body>
+
+</html>

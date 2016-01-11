@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>the5fire.com-backbone.js-Hello World</title>
+</head>
+
+<body>
+    <button id="check">新手报到</button>
+    <ul id="world-list">
+    </ul>
+    <a href="http://www.the5fire.com">更多教程</a>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script>
+    (function($) {
+        // code here
+        var Books = Backbone.Model.extend({
+            initialize: function(){
+                alert("hey, you create me!");
+            },
+
+            defaults: {
+                title: 'default'
+            }
+        });
+
+        var BookShelf = Backbone.Collection.extend({
+            Model: Books
+        });
+
+        var book1 = new Books({title: 'book1'});
+        var book2 = new Books({title: 'book2'});
+        var book3 = new Books({title: 'book3'});
+
+        var bookShelf = new BookShelf;
+        bookShelf.add(book1);
+        bookShelf.add(book2);
+        bookShelf.add(book3);
+
+        bookShelf.remove(book3);
+
+        bookShelf.each(function(book) {
+            alert(book.get('title'));
+        })
+
+        var showAllBooks = function() {
+            bookShelf.each(function(book) {
+                document.writeln(book.get('title'));
+            });
+        }
+        bookShelf.bind('reset', showAllBooks);
+        bookShelf.url = '/books/';
+        bookShelf.fetch({
+            reset: true,
+            success: function(collection, response, options) {
+                collection.each(function(book) {
+                    alert(book.get('title'));
+                });
+            }, error: function(collection, response, options) {
+                alert('error');
+            }
+        })
+    })(jQuery);
+    </script>
+</body>
+
+</html>

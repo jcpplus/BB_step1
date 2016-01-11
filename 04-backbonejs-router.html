@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>router the5fire.com-backbone.js-Hello World</title>
+</head>
+
+<body>
+    <a href="#/posts/120-">Post 120</a>
+    <button id="check">新手报到</button>
+    <ul id="world-list">
+    </ul>
+    <a href="http://www.the5fire.com">更多教程</a>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script>
+    (function($) {
+        // code here
+        var Router = Backbone.Router.extend({
+            routes: {
+                "posts/:id": "getPost",
+                "*actions": "defaultRoute"
+            },
+
+            getPost: function(id) {
+                alert(id);
+            },
+
+            defaultroute: function(actions) {
+                alert(actions);
+            }
+        });
+        var router = new Router;
+        Backbone.history.start();
+
+        var AppRouter = Backbone.Router.extend({
+
+            routes: {
+                "posts/:id": "getPost",
+                //下面对应的链接为<a href="#/download/user/images/hey.gif">download gif</a>
+                "download/*path": "downloadFile",
+                //下面对应的链接为<a href="#/dashboard/graph">Load Route/Action View</a>
+                ":route/:action": "loadView",
+                // 手动触发部分
+                "manual": "manual",
+
+                "*actions": "defaultRoute"
+            },
+
+            getPost: function(id) {
+                alert(id);
+            },
+
+            defaultRoute: function(actions) {
+                alert(actions);
+            },
+
+            downloadFile: function(path) {
+                alert(path); // user/images/hey.gif
+            },
+
+            loadView: function(route, action) {
+                alert(route + "_" + action); // dashboard_graph
+            },
+            manual: function() {
+                alert("call manual");
+                app_router.navigate("/posts/" + 404, {
+                    trigger: true,
+                    replace: true
+                });
+            }
+
+        });
+
+        var app_router = new AppRouter;
+        Backbone.history.start();
+
+    })(jQuery);
+    </script>
+</body>
+
+</html>

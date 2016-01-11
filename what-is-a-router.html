@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>What is a Collection - Backbone</title>
+</head>
+
+<body>
+    <div id="search_container"></div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script>
+    (function($) {
+        var AppRouter = Backbone.Router.extend({
+            routes: {
+                "posts/:id": "getPost",
+                "*actions": "defaultRoute",
+
+                "download/*path": "downloadFile",
+                // <a href="http://example.com/#/download/user/images/hey.gif">Download</a>
+
+                ":route/:action": "loadView",
+                // <a href="http://example.com/#/dashboard/graph">Load Route/Action View</a>
+            }
+        });
+
+        var app_router = new AppRouter();
+
+        app_router.on("route:defaultRoute", function(actions) {
+            alert(actions);
+        });
+        app_router.on('route:getPost', function(id) {
+            alert(id); // 121
+        });
+
+        app_router.on('route:downloadFile', function(path) {
+            alert(path); // user/images/hey.gif
+        });
+
+        app_router.on('route:loadView', function(route, action) {
+            alert(route + "_" + action); // dashboard_graph
+        });
+
+        Backbone.history.start();
+    })(jQuery);
+    </script>
+</body>
+
+</html>

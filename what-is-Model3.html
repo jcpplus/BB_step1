@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>What is the Model - Backbone</title>
+</head>
+
+<body>
+    <div id="search_container"></div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script>
+    (function($) {
+        var Human = Backbone.Model.extend({
+            validate: function(attributes) {
+                if (attributes.age < 0 && attributes.name != "DK") {
+                    return "You can be negative years old";
+                }
+            },
+            initialize: function() {
+                alert("Welcome to this World!!");
+                this.bind("error", function(model, error) {
+                    // We have received an error, log it, alert it or forget it :)
+                    alert(error);
+                });
+            }
+        });
+        // var human = new Human();
+        // human.set({
+        //     name: "marry",
+        //     age: -1
+        // });
+        var human = new Human();
+        human.set({
+            name: "DK",
+            age: -1
+        });
+    })(jQuery);
+    </script>
+</body>
+
+</html>
